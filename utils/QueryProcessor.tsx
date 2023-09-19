@@ -2,6 +2,17 @@ export default function QueryProcessor(query: string): string {
   const match1 = query.match(/What is (\d+) plus (\d+)\?/);
   const match2 = query.match(/Which of the following numbers is the largest: (\d+), (\d+), (\d+)\?/);
   const match3 = query.match(/What is (\d+) multiplied by (\d+)\?/);
+  if (query.toLowerCase().includes("cube")) {
+    const match4 = query.match(/\d+/g);
+    if (match4){
+      for (let i = 0; i < match4.length; i++) {
+        const currentNumber = parseInt(match4[i], 10);
+        if (Math.sqrt(currentNumber) % 1 === 0 && Math.cbrt(currentNumber) % 1 === 0) {
+          return String(currentNumber)
+        }
+      }
+    }
+  }
   if (query.toLowerCase().includes("shakespeare")) {
     return (
       "William Shakespeare (26 April 1564 - 23 April 1616) was an " +
